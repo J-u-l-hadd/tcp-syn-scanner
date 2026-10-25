@@ -31,3 +31,48 @@ Because this tool injects raw packets directly onto the network card, it require
 **Syntax:**
 ```bash
 port_scanner <target_ip_or_hostname> [-p <ports>]
+
+```
+
+**Examples:**
+
+* Scan all ports (default): `port_scanner 192.168.1.1`
+* Scan a specific port: `port_scanner scanme.nmap.org -p 80`
+* Scan a range of ports: `port_scanner 10.0.0.5 -p 1-1000`
+* Scan a list of ports: `port_scanner 127.0.0.1 -p 22,80,443`
+
+## 🧪 Test Case Scenarios
+
+### 1. The Local Loopback Test (Verifying the Environment)
+
+Proves your system drivers are working correctly without hitting the internet.
+
+* **Setup:** Open a separate terminal and run `python -m http.server 8000`.
+* **Command:** `port_scanner 127.0.0.1 -p 8000`
+* **Expected Result:** The scanner identifies port 8000 as **Open**.
+
+### 2. The Targeted Web Scan (Verifying DNS & Routing)
+
+Proves the tool can resolve hostnames and route packets.
+
+* **Command:** `port_scanner scanme.nmap.org -p 22,80,443`
+* **Expected Result:** Resolves the Nmap test server IP and accurately reports the status of the SSH and HTTP/HTTPS ports.
+
+### 3. The Firewall Check (Verifying Filtered Status)
+
+Demonstrates the tool's ability to catch silent packet drops.
+
+* **Command:** `port_scanner 192.168.1.250 -p 80` *(Use an IP address on your local network that does NOT exist).*
+* **Expected Result:** Packets will time out. The scanner reports the port as **Filtered**.
+
+## 🛠️ Building from Source
+
+```bash
+pip install -r requirements.txt
+python -m PyInstaller --onefile src/port_scanner.py
+
+```
+
+```
+
+---
