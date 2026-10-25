@@ -1,0 +1,14 @@
+Started at 2026-10-25 21:56:48	Ended at 2026-10-25 21:56:48	Duration:0:00:00.0072
+Scan complete for target 127.0.0.1 
+Total ports scanned: 1 
+Scanned ports: 8000 
+Open ports: 1 	Closed ports: 0 	Filtered ports: 0
+
+Open ports: 
+Port	Latency
+8000 	 4.54 ms
+
+Closed ports: 
+Port	Latency
+
+Filtered ports:

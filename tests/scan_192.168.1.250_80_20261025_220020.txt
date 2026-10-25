@@ -1,0 +1,14 @@
+Started at 2026-10-25 22:00:16	Ended at 2026-10-25 22:00:20	Duration:0:00:04.0244
+Scan complete for target 192.168.1.250 
+Total ports scanned: 1 
+Scanned ports: 80 
+Open ports: 0 	Closed ports: 0 	Filtered ports: 1
+
+Open ports: 
+Port	Latency
+
+Closed ports: 
+Port	Latency
+
+Filtered ports:
+Port 80 is filtered

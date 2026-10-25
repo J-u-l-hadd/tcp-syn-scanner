@@ -1,0 +1,16 @@
+Started at 2026-10-25 21:57:51	Ended at 2026-10-25 21:57:51	Duration:0:00:00.1762
+Scan complete for target 45.33.32.156 
+Total ports scanned: 3 
+Scanned ports: [22, 80, 443] 
+Open ports: 2 	Closed ports: 1 	Filtered ports: 0
+
+Open ports: 
+Port	Latency
+22 	 170.70 ms
+80 	 172.14 ms
+
+Closed ports: 
+Port	Latency
+443 	 170.06 ms
+
+Filtered ports:
