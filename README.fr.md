@@ -74,22 +74,3 @@ python -m PyInstaller --onefile src/port_scanner.py
 ```
 
 ```
-
----
-
-### `.gitignore` (Standard for both)
-```text
-# PyInstaller folders
-build/
-dist/
-*.spec
-
-# Python cache
-__pycache__/
-*.pyc
-
-# Local reports generated during testing
-*.txt
-!requirements.txt
-
-```
