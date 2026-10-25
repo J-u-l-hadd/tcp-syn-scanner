@@ -72,7 +72,3 @@ pip install -r requirements.txt
 python -m PyInstaller --onefile src/port_scanner.py
 
 ```
-
-```
-
----
