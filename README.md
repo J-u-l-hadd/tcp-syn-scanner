@@ -72,3 +72,5 @@ pip install -r requirements.txt
 python -m PyInstaller --onefile src/port_scanner.py
 
 ```
+## ⚠️ Note on Latency
+Because this scanner uses Scapy to batch and send all packets simultaneously for maximum speed, you may notice artificially high latency times for later ports in a large scan. This is caused by **OS Queuing Delay** (buffer bloat). Packets wait in the operating system's network buffer before hitting the wire, so the reported latency reflects the total time spent in the queue rather than the true network ping.
