@@ -72,3 +72,5 @@ pip install -r requirements.txt
 python -m PyInstaller --onefile src/port_scanner.py
 
 ```
+## ⚠️ Note sur la Latence
+Étant donné que ce scanner utilise Scapy pour envoyer tous les paquets simultanément afin de maximiser la vitesse, vous remarquerez peut-être des temps de latence artificiellement élevés sur de larges plages de ports. Ce phénomène est dû au **délai de mise en file d'attente de l'OS** (OS Queuing Delay). Les paquets patientent dans la mémoire tampon du système d'exploitation avant d'être expédiés, la latence affichée reflète donc le temps d'attente global plutôt que le véritable ping réseau.
