@@ -1,33 +1,80 @@
-*Lire dans d'autres langues : [English](README.md)*
+*Read this in other languages: [Français](README.fr.md)*
 
-# Scanner de Ports TCP SYN Personnalisé 🔍
+# Custom TCP SYN Port Scanner 🔍
 
-Un scanner de ports TCP SYN (Furtif) léger et ultra-rapide, développé en Python avec Scapy.
+A lightweight, high-speed TCP SYN (Stealth) port scanner built with Python and Scapy. 
 
-Contrairement aux scanners standards qui effectuent une connexion complète, cet outil forge des paquets IP et TCP bruts pour initier une connexion semi-ouverte (scan SYN). Cela permet d'identifier rapidement les ports Ouverts, Fermés et Filtrés (bloqués par un pare-feu) sans terminer la triple poignée de main TCP (three-way handshake). Il génère automatiquement des rapports textuels horodatés pour chaque scan dans le répertoire courant.
+Unlike standard full-connect scanners, this tool crafts raw IP and TCP packets to initiate a half-open connection (SYN scan). This allows it to quickly identify Open, Closed, and Filtered (firewalled) ports without completing the three-way handshake. It generates automated, timestamped text reports for every scan in the current working directory.
 
-## 🚀 Fonctionnalités
-*   **Scan Furtif :** Utilise des paquets SYN bruts pour éviter les connexions TCP complètes.
-*   **Catégorisation Intelligente :** Fait la différence entre les ports fermés (RST) et les ports filtrés/pare-feu (rejets ICMP/délais d'attente).
-*   **Rapports Dynamiques :** Sauvegarde automatique des résultats avec des noms de fichiers horodatés (ex: `scan_127.0.0.1_all_20261025_214356.txt`).
-*   **Binaires Autonomes :** Précompilé pour Windows (`.exe`) et Linux Debian/Ubuntu (aucune installation Python requise).
+## 🚀 Features
+*   **Stealth Scanning:** Uses raw SYN packets to avoid full TCP connections.
+*   **Smart Categorization:** Differentiates between closed ports (RST) and firewalled/filtered ports (ICMP drops/timeouts).
+*   **Dynamic Reporting:** Automatically saves results with timestamped filenames (e.g., `scan_127.0.0.1_all_20261025_214356.txt`).
+*   **Standalone Binaries:** Pre-compiled for Windows (`.exe`) and Debian/Ubuntu Linux (no Python installation required).
 
-## ⚙️ Prérequis & Installation
+## ⚙️ Prerequisites & Setup
 
-Cet outil injectant des paquets bruts directement sur la carte réseau, il nécessite des privilèges d'exploitation de bas niveau.
+Because this tool injects raw packets directly onto the network card, it requires low-level OS permissions.
 
-### 🪟 Utilisateurs Windows
-1. Téléchargez `port_scanner.exe` depuis la page Releases.
-2. **Installer Npcap :** Vous devez installer [Npcap](https://npcap.com/). Lors de l'installation, **vous devez impérativement cocher la case "Support loopback traffic"**, sinon le scanner plantera lors des tests locaux.
-3. **Exécuter en tant qu'Administrateur :** Ouvrez l'Invite de commandes ou PowerShell en tant qu'administrateur pour exécuter le scanner.
+### 🪟 Windows Users
+1. Download `port_scanner.exe` from the Releases page.
+2. **Install Npcap:** You must install [Npcap](https://npcap.com/). During installation, **you must check the box for "Support loopback traffic"**, otherwise the scanner will fail on local tests.
+3. **Run as Administrator:** Open your Command Prompt or PowerShell as an Administrator to execute the scanner.
 
-### 🐧 Utilisateurs Linux (Debian/Ubuntu)
-1. Téléchargez le binaire `port_scanner` depuis la page Releases.
-2. Accordez les droits d'exécution : `chmod +x port_scanner`
-3. **Exécuter en tant que Root :** Vous devez utiliser `sudo` pour lancer l'outil afin que le noyau Linux autorise l'accès aux sockets bruts (raw sockets).
+### 🐧 Linux (Debian/Ubuntu) Users
+1. Download the `port_scanner` binary from the Releases page.
+2. Grant execution permissions: `chmod +x port_scanner`
+3. **Run as Root:** You must use `sudo` to run the tool so the Linux kernel allows raw socket access.
 
-## 💻 Utilisation
+## 💻 Usage
 
-**Syntaxe :**
+**Syntax:**
 ```bash
-port_scanner <ip_cible_ou_domaine> [-p <ports>]
+port_scanner <target_ip_or_hostname> [-p <ports>]
+
+```
+
+**Examples:**
+
+* Scan all ports (default): `port_scanner 192.168.1.1`
+* Scan a specific port: `port_scanner scanme.nmap.org -p 80`
+* Scan a range of ports: `port_scanner 10.0.0.5 -p 1-1000`
+* Scan a list of ports: `port_scanner 127.0.0.1 -p 22,80,443`
+
+## 🧪 Test Case Scenarios
+
+### 1. The Local Loopback Test (Verifying the Environment)
+
+Proves your system drivers are working correctly without hitting the internet.
+
+* **Setup:** Open a separate terminal and run `python -m http.server 8000`.
+* **Command:** `port_scanner 127.0.0.1 -p 8000`
+* **Expected Result:** The scanner identifies port 8000 as **Open**.
+
+### 2. The Targeted Web Scan (Verifying DNS & Routing)
+
+Proves the tool can resolve hostnames and route packets.
+
+* **Command:** `port_scanner scanme.nmap.org -p 22,80,443`
+* **Expected Result:** Resolves the Nmap test server IP and accurately reports the status of the SSH and HTTP/HTTPS ports.
+
+### 3. The Firewall Check (Verifying Filtered Status)
+
+Demonstrates the tool's ability to catch silent packet drops.
+
+* **Command:** `port_scanner 192.168.1.250 -p 80` *(Use an IP address on your local network that does NOT exist).*
+* **Expected Result:** Packets will time out. The scanner reports the port as **Filtered**.
+
+## 🛠️ Building from Source
+
+```bash
+pip install -r requirements.txt
+python -m PyInstaller --onefile src/port_scanner.py
+
+```
+
+```
+
+---
+
+### `README.fr.md` (French)
