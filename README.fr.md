@@ -74,7 +74,3 @@ python -m PyInstaller --onefile src/port_scanner.py
 ```
 
 ```
-
----
-
-### `README.fr.md` (French)
