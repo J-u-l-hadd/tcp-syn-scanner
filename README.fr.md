@@ -93,10 +93,3 @@ __pycache__/
 !requirements.txt
 
 ```
-
-### `requirements.txt`
-
-```text
-scapy==2.5.0
-
-```
