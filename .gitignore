@@ -1,1 +1,16 @@
+### `.gitignore`
+```text
+# PyInstaller folders
+build/
+dist/
+*.spec
 
+# Python cache
+__pycache__/
+*.pyc
+
+# Local reports generated during testing
+*.txt
+!requirements.txt
+
+```
